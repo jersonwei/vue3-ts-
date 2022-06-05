@@ -10,9 +10,25 @@
     "lint:css": "stylelint **/*.{vue,htm,html,css,sss,less,scss,sass} --fix",
     "cm": "git-cz"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint src/**/*.{js,jsx,ts,tsx}",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "lint-staged": {
-    "*.{js,vue,ts}": [
-      "npm run lint"
+    "*.vue": [
+      "eslint --fix",
+      "stylelint --fix",
+      "git add"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{htm,html,css,sss,less,scss,sass}": [
+      "stylelint --fix",
+      "git add"
     ]
   },
   "config": {
@@ -24,6 +40,7 @@
     "babel-eslint": "^10.1.0",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.1",
     "stylelint": "^14.8.5",
     "stylelint-config-standard": "^25.0.0",
     "vue": "^3.2.25"
